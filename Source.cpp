@@ -82,6 +82,35 @@ void write() {
 					curr = curr->next;
 				}
 			}
+			// Up Arrow
+			if (letter == 72)
+			{
+				if (y > 0)
+				{
+					//go up
+					y--;
+					start = arr[y];
+					curr = start;
+					for (int i = 0; i < x-1; i++)
+					{
+						curr = curr->next;
+					}
+				}
+			}
+			//Down Arrow
+			if (letter == 80)
+			{
+				if (y <= 10 && arr[y+1] != nullptr)
+				{
+					y++;
+					start = arr[y];
+					curr = start;
+					for (int i = 0; i < x-1; i++)
+					{
+						curr = curr->next;
+					}
+				}
+			}
 		}
 		//Return
 		else if (letter == 13)//enter/return
@@ -126,12 +155,18 @@ void write() {
 			//delete in middle
 			else if ((curr->next != nullptr) && (curr->prev != nullptr))
 			{
+				/*
 				Node* x = curr->next;
 				curr->prev->next = x;
 				x->prev = curr->prev;
 				delete curr;
 				x = curr;
-				x -= 2;
+				*/
+				curr->prev->next = curr->next;
+				curr->next->prev = curr->prev;
+				Node* tmp = curr->next;
+				delete(curr);
+				curr = tmp;
 			}
 		}
 		//regular character (number, character, special symbols)
@@ -155,17 +190,13 @@ void write() {
 					x->c = letter;
 
 					// Make the new node the 'start'
-					// and make its next the previous start's n
-					
-					//start = x;
-					//curr = start->next;
+					// and make its next the previous start's node
 
 					x->next = start;
 					start->prev = x;
 					x->prev = nullptr;
 					start = x;
 					arr[y] = start;
-					//curr = start;
 				}
 				//insert at end
 				else if (curr->next == nullptr)
