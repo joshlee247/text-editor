@@ -1,0 +1,6 @@
+﻿  Source.cpp
+E:\Windows\Visual Studio\Text Editor C++\Source.cpp(417,8): warning C4101:  'arr': unreferenced local variable
+E:\Windows\Visual Studio\Text Editor C++\Source.cpp(408,7): warning C4101:  'c': unreferenced local variable
+E:\Windows\Visual Studio\Text Editor C++\Source.cpp(466,16): warning C4838:  conversion from 'int' to 'SHORT' requires a narrowing conversion
+E:\Windows\Visual Studio\Text Editor C++\Source.cpp(466,19): warning C4838:  conversion from 'int' to 'SHORT' requires a narrowing conversion
+  Text Editor C++.vcxproj -> E:\Windows\Visual Studio\Text Editor C++\Debug\Text Editor C++.exe
