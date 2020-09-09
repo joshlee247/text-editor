@@ -1,1 +1,3 @@
-abc
+Here is my text editor
+Here is another line
+Here is another line

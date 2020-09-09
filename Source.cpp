@@ -67,6 +67,7 @@ void write() {
 					curr = curr->prev;
 					x--;
 				}
+				//left arrow at the beginning of a file
 				else
 				{
 					curr = start;
@@ -76,6 +77,7 @@ void write() {
 			// -> Right 77
 			if (letter == 77)
 			{
+				//right arrow as long as there is a node after curr
 				if (curr->next != nullptr)
 				{
 					x++;
@@ -100,6 +102,8 @@ void write() {
 			//Down Arrow
 			if (letter == 80)
 			{
+				//checks to see if there is a line below and if there is
+				//it will go down a line
 				if (y <= 10 && arr[y+1] != nullptr)
 				{
 					y++;
@@ -113,7 +117,7 @@ void write() {
 			}
 		}
 		//Return
-		else if (letter == 13)//enter/return
+		else if (letter == 13)
 		{
 			x = 0;
 			y++;
@@ -139,7 +143,14 @@ void write() {
 			//deletes carriage return
 			else if (arr[y] != 0 && curr == start)
 			{
-				//delete carriage return
+				//go up
+				y--;
+				start = arr[y];
+				curr = start;
+				while (curr->next)
+				{
+					curr = curr->next;
+				}
 			}
 			//deletes at end
 			else if ((curr->next == nullptr) && (curr->prev))
@@ -167,11 +178,13 @@ void write() {
 				Node* tmp = curr->next;
 				delete(curr);
 				curr = tmp;
+				x--;
 			}
 		}
 		//regular character (number, character, special symbols)
 		else
 		{
+			//first character of file
 			if (start == nullptr)
 			{
 				Node* x = new Node();
@@ -182,7 +195,7 @@ void write() {
 			}
 			else
 			{
-				//insert at start
+				//inserts at front after typing
 				if (x == 0)
 				{
 					// Create a new node and assign the character
@@ -223,6 +236,8 @@ void write() {
 			x++;
 		}
 		system("cls");
+
+		//prints linked list
 		for (int i = 0; i < 10; i++)
 		{
 			if (arr[i] != nullptr)
@@ -252,7 +267,7 @@ void write() {
 		cout << "Name of file: ";
 		cin >> fileName;
 		ofstream myFile;
-		myFile.open(fileName); //no spaces currently
+		myFile.open(fileName, ios::app);
 
 		Node* nodePtr;
 		nodePtr = start;
@@ -294,6 +309,9 @@ void ShowConsoleCursor(bool showFlag)
 
 //displays menu
 int displayMenu() {
+
+	//Press Spacebar to Select Option
+
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 143);
 	cout << "[FILE]" << " " << "[EDIT]" << " " << "[FORMAT]" << " " << "[VIEW]" << " " << "[HELP]" << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " " << " ";
 	//New = 1, Open.. = 2, X Close = 3
@@ -313,7 +331,10 @@ int displayMenu() {
 	gotoxy(55, 15);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 252);
 	cout << " X Close  " << endl;
+
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 240);
+	gotoxy(43, 20);
+	cout << "Press Spacebar to select an option";
 
 
 	while (1) {
@@ -394,15 +415,7 @@ int displayMenu() {
 
 	return option;
 }
-/*
-void printList(Node* node)
-{
-	while (node != NULL) {
-		cout << node->c;
-		node = node->next;
-	}
-}
-*/
+
 void open() {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 240);
 	char c;
@@ -410,8 +423,10 @@ void open() {
 	cout << "What is the path of your file?" << endl;
 	cin >> fileName;
 
+	system("cls");
+
 	ifstream openFile;
-	openFile.open(fileName);
+	openFile.open(fileName, ios::app);
 
 	Node* nodePtr;
 	Node* arr[10];
@@ -431,7 +446,7 @@ void open() {
 	}
 
 	cout << text << endl;
-
+	write();
 
 	//convertString();
 }
